@@ -10,7 +10,7 @@ war/WEB-INF/lib/appengine*.jar
 *.war
 
 # boilerplate generated classes #
-.apt_generated/
+#.apt_generated/
 
 # more caches and things from deploy #
 war/WEB-INF/deploy/

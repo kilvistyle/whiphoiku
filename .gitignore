@@ -7,6 +7,7 @@
 
 # Package Files #
 war/WEB-INF/lib/appengine*.jar
+war/WEB-INF/lib/jsr107cache-*.jar
 *.war
 
 # boilerplate generated classes #

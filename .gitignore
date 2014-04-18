@@ -1,0 +1,24 @@
+##############
+# .gitignore #
+##############
+
+# java class files #
+*.class
+
+# Package Files #
+war/WEB-INF/lib/appengine*.jar
+*.war
+
+# boilerplate generated classes #
+#.apt_generated/
+
+# more caches and things from deploy #
+war/WEB-INF/deploy/
+war/WEB-INF/classes/
+
+# App engine generated #
+war/WEB-INF/appengine-generated/
+
+# eclipse settings #
+.settings/
+.externalToolBuilders/

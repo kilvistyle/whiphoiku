@@ -20,11 +20,5 @@ war/WEB-INF/classes/
 war/WEB-INF/appengine-generated/
 
 # eclipse settings #
-.settings/
+.settings/com.google.appengine.eclipse.core.prefs
 .externalToolBuilders/
-
-#####################
-# includes settings #
-#####################
-!.settings/org.eclipse.jdt.apt.core.prefs
-!.settings/org.eclipse.jdt.core.prefs

@@ -12,6 +12,12 @@ import whiphoiku.model.HoikuInfo;
 
 import com.google.appengine.api.datastore.GeoPt;
 
+/**
+ * GetHoikuInfoController.
+ * 
+ * @author kilvistyle
+ *
+ */
 public class GetHoikuInfoController extends AbstractJsonController {
     
     @Override
@@ -26,15 +32,15 @@ public class GetHoikuInfoController extends AbstractJsonController {
         Integer distance = asInteger("search_area");
         Integer age = asInteger("age");
         Integer pp = asInteger("public_private");
-        
+        // Daoを生成
         HoikuInfoDao dao = new HoikuInfoDao();
         List<HoikuInfo> hoikuInfoList = new ArrayList<HoikuInfo>();
+        // 初期表示時は全件検索
         if (age == null || pp == null) {
-            // 初期表示時は全件検索
-            hoikuInfoList = dao.findAll();
+            hoikuInfoList = dao.findAll(); // 全件
         }
         else {
-            hoikuInfoList = dao.findByCondition(pp, age);
+            hoikuInfoList = dao.findByCondition(pp, age); // 絞り込み条件
         }
         Iterator<HoikuInfo> iteHoiku = hoikuInfoList.iterator();
         while (iteHoiku.hasNext()) {

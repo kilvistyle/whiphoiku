@@ -17,6 +17,9 @@
   <script type="text/javascript">
   <!--
     $(function() {
+    	// 処理中フラグ
+    	var isWorking = false;
+    	
         // 保育マップ表示処理
         var mapObj = $('#map');
         mapObj.hoikuMap({
@@ -24,7 +27,7 @@
             photo : true
         });
 
-        $('form').submit(function() {
+        $('form#hoiku').submit(function() {
             var address = $('#address').val();
             if (!address) {
                 alert('住所が入力されていません');
@@ -41,6 +44,47 @@
             }
             return false;
         });
+
+        $('form#mail').submit(function() {
+        	if (isWorking) {
+        		alert('処理中です...');
+        		return false;
+        	}
+        	isWorking = true;
+        	var to = $('#to_addr').val();
+        	var from = $('#from_addr').val();
+        	var subject = $('#subject').val();
+        	var body = $('#body').val();
+            // メール送信テスト
+            $.ajax({
+                type: 'POST',
+                url: '/api/mail',
+                data: {
+                	to: to,
+                	from: from,
+                	subject: subject,
+                	body: body
+                	},
+                dataType: 'JSON',
+                timeout: 20000,
+                success: function(json, dataType){
+                	// 結果のチェック
+                    if (!handleError(json)) {
+                    	// 正常時
+                    	alert('メールを送信しました。');
+                    } else {
+                    	alert('メールを送信に失敗しました。');
+                    }
+                    isWorking = false;
+                },
+                error: function() {
+                    // タイムアウト時のコールバック
+                	alert('メールを送信がタイムアウトしました。');
+                    isWorking = false;
+                }
+            });
+        	return false;
+        });
     });
   // -->
   </script>
@@ -56,9 +100,20 @@
 	</form>
 </div>
 
+<h3>Mail Send API Test.</h3>
+<div style="margin-bottom:47px;">
+	<form id="mail" method="post">
+		<div><input placeholder="to_example@csvteam.com..." id="to_addr" type="text"></div>
+		<div><input placeholder="from_example@csvteam.com..." id="from_addr" type="text"></div>
+		<div><input placeholder="subject..." id="subject" type="text"></div>
+		<div><textarea placeholder="body..." id="body"></textarea></div>
+		<button id="mail_submit" type="submit">Send</button>
+	</form>
+</div>
+
 <h3>Google Geocoding API Test.</h3>
 <div>
-    <form  method="post" name="search" accept-charset="utf-8" class="fm NiceIt">
+    <form method="post" name="search" id="hoiku" accept-charset="utf-8" class="fm NiceIt">
       <fieldset>
         <input type="text" id="address" class="form-control" placeholder="東京都台東区" />
       </fieldset>
@@ -101,9 +156,7 @@
       </button>
     </form>
 </div>
-<div id="georesult">
-</div>
-
 <div id="map" style="height: 1000pt;"></div>
+
 </body>
 </html>

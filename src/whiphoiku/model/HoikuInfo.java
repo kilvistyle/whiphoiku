@@ -1,16 +1,18 @@
 package whiphoiku.model;
 
 import java.io.Serializable;
-
-import com.google.appengine.api.datastore.GeoPt;
-import com.google.appengine.api.datastore.Key;
+import java.util.Date;
 
 import org.slim3.datastore.Attribute;
+import org.slim3.datastore.CreationDate;
 import org.slim3.datastore.Model;
+import org.slim3.datastore.ModificationDate;
 
 import whiphoiku.util.IJsonable;
 import whiphoiku.util.JsonUtil;
-import whiphoiku.util.NavigateUtil;
+
+import com.google.appengine.api.datastore.GeoPt;
+import com.google.appengine.api.datastore.Key;
 
 @Model(schemaVersion = 1)
 public class HoikuInfo implements Serializable, IJsonable {
@@ -56,10 +58,19 @@ public class HoikuInfo implements Serializable, IJsonable {
     // 募集人数 ５歳児
     private int collectFiveYear;
     
-    // 距離
+    // 距離 (非永続化情報)
+    @Attribute(persistent=false)
     private Double distance;
-    // 対象年齢募集人数
+    // 対象年齢募集人数 (非永続化情報)
+    @Attribute(persistent=false)
     private int targetVacant; 
+
+    /** 初期登録日時 */
+    @Attribute(listener = CreationDate.class)
+    private Date insertTime;
+    /** 最終更新日時 */
+    @Attribute(listener = ModificationDate.class)
+    private Date updateTime;
     
     public String getAddress() {
         return address;
@@ -204,7 +215,35 @@ public class HoikuInfo implements Serializable, IJsonable {
         this.name = name;
     }
 
-    @Override
+    /**
+	 * @return the insertTime
+	 */
+	public Date getInsertTime() {
+		return insertTime;
+	}
+
+	/**
+	 * @param insertTime the insertTime to set
+	 */
+	public void setInsertTime(Date insertTime) {
+		this.insertTime = insertTime;
+	}
+
+	/**
+	 * @return the updateTime
+	 */
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	/**
+	 * @param updateTime the updateTime to set
+	 */
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;

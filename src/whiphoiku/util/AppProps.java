@@ -23,6 +23,8 @@ public class AppProps {
     public static final int COOKIE_MAX_AGE = Integer.parseInt(bundle.getString("cookie.maxage"));
     /** Cookieの暗号キー(128bit) */
     public static final String COOKIE_CIPHER_KEY = bundle.getString("cookie.cipherkey");
+    /** ワンタイムパスワードの有効期間（単位：日） */
+    public static final int OTP_VALIDTERM = Integer.parseInt(bundle.getString("otp.validterm"));
 
     /** google url shortener url */
     public static final String GOOGLE_URL_SHORTENER_URL = bundle.getString("google.url.shortener.url");

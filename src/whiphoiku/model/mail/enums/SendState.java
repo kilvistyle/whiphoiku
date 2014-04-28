@@ -1,13 +1,9 @@
-/**
- * Copyright (c) 2009 Satoshi Chiba
- */
 package whiphoiku.model.mail.enums;
 
 /**
  * SendState.
  * 
- * @author Satoshi Chiba
- * @since 2009/11/16
+ * @author kilvistle
  *
  */
 public enum SendState {

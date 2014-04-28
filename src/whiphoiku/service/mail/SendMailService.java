@@ -1,6 +1,3 @@
-/**
- * Copyright (c) 2009 Satoshi Chiba
- */
 package whiphoiku.service.mail;
 
 import java.util.ArrayList;
@@ -27,7 +24,6 @@ import com.google.appengine.api.taskqueue.TaskOptions;
  * SendMailService.
  * 
  * @author kilvistyle
- * @since 2009/11/16
  *
  */
 public class SendMailService {

@@ -22,7 +22,7 @@ import com.google.appengine.api.datastore.Transaction;
  * OneTimePassService.
  * ワンタイムパスワードの生成、使用などを行います。
  * 
- * @author s.chiba
+ * @author kilvistyle
  */
 public class OneTimePassService {
 	

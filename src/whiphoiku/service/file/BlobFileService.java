@@ -31,7 +31,6 @@ import com.google.appengine.api.mail.MailService.Attachment;
  * BlobStore操作に関するサービスクラス。
  * 
  * @author kilvistyle
- * @since 2011/06/15
  */
 public class BlobFileService {
 	

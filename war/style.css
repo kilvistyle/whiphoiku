@@ -64,6 +64,22 @@ h1{
 	position:relative;
 	z-index:1;
 }
+
+#reg_mail{
+    border-radius: 5px;        /* CSS3草案 */  
+    -webkit-border-radius: 5px;    /* Safari,Google Chrome用 */  
+    -moz-border-radius: 5px;   /* Firefox用 */  
+    margin-top:5px;
+    padding:10px;
+    height:auto;
+    position:absolute;
+    height:auto:;
+    z-index:20;
+    right: 40%;
+    bottom: 30px;
+    display: none;
+}
+
 #button_open_set{
 	background-color:#F6F6F6;
 	border-radius: 5px;        /* CSS3草案 */  

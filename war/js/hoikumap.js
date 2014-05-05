@@ -7,10 +7,7 @@ $.fn.hoikuMap = function(s) {
 	var homeMarker = null;
 	// オプションパラメータの初期値指定
 	var defaults = {
-		mode: 'get', // get|valid|latest|all
-		id : null,   // if mode value is 'get', it required.
-		admin: false, // admin mode.
-		photo: false
+		
 	};
 	// オプションパラメータの取得
 	s = $.extend({}, defaults, s);
@@ -83,7 +80,7 @@ $.fn.hoikuMap = function(s) {
 	    });
     
     // 地点を基点にした周辺検索
-    this.search = function(cond) {
+    this.search = function(cond, callback) {
     	// 検索条件の初期値指定
     	var defaults = {
     		address : null,
@@ -101,34 +98,31 @@ $.fn.hoikuMap = function(s) {
     		return;
     	}
     	// 検索条件の住所からGeoPtを求めて検索条件に設定する処理
-    	// cond.address から cond.lat , cond.lng を求める
-    	var toGeoPt = function(cond, successCallback, errorCallback) {
-        	// GeoPt変換が必要な場合は変換
-        	if (!cond.lat || !cond.lng) {
-        		// url shortener api call
-        		toGeocode(cond.address,
-        			// success callback
-        			function(geocodeinfo) {
-    	    			// 保育マップ表示処理
-    	    			cond.lat = geocodeinfo[0].geometry.location.lat;
-    	    			cond.lng = geocodeinfo[0].geometry.location.lng;
-    	    			// 成功処理をコール
-    	    			successCallback(cond);
-        			},
-        			// error callback
-        			function (err) {
-        	    		console.log('住所変換に失敗しました.'+$.esc(err.errMsg));
-        	    		if (errorCallback) errorCallback(err);
-        	    		return;
-        			});
-        	} 
-        	else {
-    			// 変換不要なのでそのま成功処理をコール
-    			successCallback(cond);
-        	}
+    	// GeoPt変換が必要な場合は変換
+    	if (!cond.lat || !cond.lng) {
+    		// url shortener api call
+    		toGeocode(cond.address,
+    			// success callback
+    			function(geocodeinfo) {
+	    			// 保育マップ表示処理
+	    			cond.lat = geocodeinfo[0].geometry.location.lat;
+	    			cond.lng = geocodeinfo[0].geometry.location.lng;
+	    			// 保育情報検索
+	    			findHoikuInfoByGeoPt(cond);
+    			},
+    			// error callback
+    			function (err) {
+    	    		console.log('住所変換に失敗しました.'+$.esc(err.errMsg));
+            		alert('住所の特定に失敗しました：'+$.esc(err.errMsg));
+    	    		return;
+    			});
+    	} 
+    	else {
+			// 変換不要なのでそのま保育情報検索
+			findHoikuInfoByGeoPt(cond);
     	}
-    	// 検索条件のGeoPtから周辺の保育園を検索しマップにポイントする処理
-        var findHoikuInfoByGeoPt = function(cond) {
+    	// 検索条件のGeoPtから周辺の保育園を検索しマップにプロットする処理
+        function findHoikuInfoByGeoPt(cond) {
         	// ホームマーカーを配置
         	map.setItems([{
         			home:true,
@@ -156,6 +150,8 @@ $.fn.hoikuMap = function(s) {
                     if (!handleError(json)) {
                     	// 結果をマップに出力
                     	map.addItems(json.result);
+                    	// 成功時処理を実行
+                    	if (callback) callback();
                     }
                     else {
                     	console.log('情報の取得に失敗しました：'+$.esc(json.errMsg));
@@ -165,17 +161,6 @@ $.fn.hoikuMap = function(s) {
             });
         }
         
-        // 検索処理を実行
-        toGeoPt(
-        	// 検索条件
-        	cond,
-        	// 住所変換に成功後の検索処理
-        	// GeoPtから保育園情報を検索する処理をコール
-        	findHoikuInfoByGeoPt,
-        	// 住所変換に失敗した場合
-        	function(err){
-        		alert('住所の特定に失敗しました：'+$.esc(err.errMsg));
-        });
     }
     
 }

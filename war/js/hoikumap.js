@@ -151,7 +151,7 @@ $.fn.hoikuMap = function(s) {
                     	// 結果をマップに出力
                     	map.addItems(json.result);
                     	// 成功時処理を実行
-                    	if (callback) callback();
+                    	if (callback) callback(cond);
                     }
                     else {
                     	console.log('情報の取得に失敗しました：'+$.esc(json.errMsg));

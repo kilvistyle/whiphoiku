@@ -25,6 +25,9 @@ public class AppProps {
     public static final String COOKIE_CIPHER_KEY = bundle.getString("cookie.cipherkey");
     /** ワンタイムパスワードの有効期間（単位：日） */
     public static final int OTP_VALIDTERM = Integer.parseInt(bundle.getString("otp.validterm"));
+    
+    /** ユーザ向け問い合わせ先メールアドレス */
+    public static final String MAIL_FOR__CUSTOMER = bundle.getString("mail.for_customer");
 
     /** google url shortener url */
     public static final String GOOGLE_URL_SHORTENER_URL = bundle.getString("google.url.shortener.url");

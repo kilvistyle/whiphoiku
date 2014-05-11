@@ -39,6 +39,13 @@ public class AppUser extends AuthUser {
     /** ステータス */
     private UserState state = UserState.CERTIFIES;
     
+    /** 検索条件：距離（km） */
+    private Double distance;
+    /** 検索条件：公立／私立（1=公立, 2=私立） */
+    private Integer schoolKubun;
+    /** 検索条件：年齢 */
+    private Integer targetAge;
+    
     @Attribute(lob=true)
     /** 権限 */
     private String[] roles;
@@ -171,6 +178,48 @@ public class AppUser extends AuthUser {
 	 */
 	public void setState(UserState state) {
 		this.state = state;
+	}
+
+	/**
+	 * @return the distance
+	 */
+	public Double getDistance() {
+		return distance;
+	}
+
+	/**
+	 * @param distance the distance to set
+	 */
+	public void setDistance(Double distance) {
+		this.distance = distance;
+	}
+
+	/**
+	 * @return the schoolKubun
+	 */
+	public Integer getSchoolKubun() {
+		return schoolKubun;
+	}
+
+	/**
+	 * @param schoolKubun the schoolKubun to set
+	 */
+	public void setSchoolKubun(Integer schoolKubun) {
+		this.schoolKubun = schoolKubun;
+	}
+
+	/**
+	 * @return the targetAge
+	 */
+	public Integer getTargetAge() {
+		return targetAge;
+	}
+
+	/**
+	 * @param targetAge the targetAge to set
+	 */
+	public void setTargetAge(Integer targetAge) {
+		this.targetAge = targetAge;
 	}
 
 	/**

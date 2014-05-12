@@ -51,7 +51,7 @@ public class RegmailController extends AbstractController {
             // 認証用メールを作成
             SendMail mail = new SendMail();
             mail.setTo(Arrays.asList(asString("mail")));
-            mail.setBcc(Arrays.asList(AppProps.MAIL_FOR__CUSTOMER)); // 控え用
+            mail.setBcc(Arrays.asList(AppProps.MAIL_FOR_BACKUP)); // 控え用
             // 送信メールテンプレートを生成
             File ftlFile = null;
             // テンプレートメッセージ用の置換変数を準備
@@ -61,7 +61,7 @@ public class RegmailController extends AbstractController {
             varMap.put("name", asString("mail"));
             varMap.put("regmailUrl", NavigateUtil.getSecureRootURL()+"/auth/register?otp="+otp.getOneTimePass());
             varMap.put("limitDay", AppProps.OTP_VALIDTERM);
-            varMap.put("mailForCustomer", AppProps.MAIL_FOR__CUSTOMER);
+            varMap.put("mailForCustomer", AppProps.MAIL_FOR_CUSTOMER);
             // メールテンプレートを読み込む
             MailUtil.storeTemplate(mail, ftlFile, varMap);
             // 生成したメールを送信

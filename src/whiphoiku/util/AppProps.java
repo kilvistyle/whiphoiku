@@ -27,8 +27,10 @@ public class AppProps {
     public static final int OTP_VALIDTERM = Integer.parseInt(bundle.getString("otp.validterm"));
     
     /** ユーザ向け問い合わせ先メールアドレス */
-    public static final String MAIL_FOR__CUSTOMER = bundle.getString("mail.for_customer");
-
+    public static final String MAIL_FOR_CUSTOMER = bundle.getString("mail.for_customer");
+    /** 送信メールバックアップ用メールアドレス（アプリからの送信メールのBCCに設定） */
+    public static final String MAIL_FOR_BACKUP = bundle.getString("mail.for_backup");
+    
     /** google url shortener url */
     public static final String GOOGLE_URL_SHORTENER_URL = bundle.getString("google.url.shortener.url");
     /** google url shortener key */

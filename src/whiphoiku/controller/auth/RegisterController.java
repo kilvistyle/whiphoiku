@@ -47,10 +47,18 @@ public class RegisterController extends AbstractController {
     		return forward("register.jsp");
     	}
     	// チェックOKのため登録する
-    	AppUser user = new AppUser();
+    	// メールアドレスを取得
+    	String mail = otp.param("mail");
+    	// 既に登録済みのメールアドレスの場合は上書き更新するため既存情報を取得する
+    	AppUserDao userDao = new AppUserDao();
+    	AppUser user = userDao.findByMail(mail);
+    	// 初回のメアド登録の場合
+    	if (user == null) {
+        	user = new AppUser();
+    	}
     	user.setState(UserState.ACTIVE);
-    	user.setName((String)otp.param("mail"));
-    	user.setMail((String)otp.param("mail"));
+    	user.setName(mail);
+    	user.setMail(mail);
     	user.setAddress((String)otp.param("address"));
     	GeoPt geoPt = new GeoPt(
     			Float.parseFloat((String)otp.param("lat")),

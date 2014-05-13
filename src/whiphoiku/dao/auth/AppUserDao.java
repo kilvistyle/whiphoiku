@@ -10,7 +10,7 @@ public class AppUserDao extends DaoBase<AppUser>{
 
 	private static final AppUserMeta meta = AppUserMeta.get();
 	
-	public AppUser getByMail(String mail) {
+	public AppUser findByMail(String mail) {
 		return Datastore.query(meta)
 			.filter(meta.mail.equal(mail))
 			.asSingle();

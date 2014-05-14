@@ -24,7 +24,8 @@
   <script src="/js/bootstrap.min.js"></script>
   <script type="text/javascript" charset="UTF-8">
   $(function() {
-	  $('a').secureURL(false);
+	  // セキュア通信しないリンクのノンセキュアドメインを追加
+	  $('a').appendDomain('${_nonSecureDomain}');
   });
   </script>
   </head>

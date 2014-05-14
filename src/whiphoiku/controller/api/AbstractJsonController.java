@@ -7,11 +7,11 @@ import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.slim3.controller.Controller;
 import org.slim3.controller.Navigation;
 import org.slim3.controller.validator.Validators;
 import org.slim3.util.ThrowableUtil;
 
+import whiphoiku.controller.AbstractController;
 import whiphoiku.util.AppProps;
 import whiphoiku.util.IJsonable;
 import whiphoiku.util.JsonUtil;
@@ -22,7 +22,7 @@ import whiphoiku.util.JsonUtil;
  * 
  * @author kilvistyle
  */
-public abstract class AbstractJsonController extends Controller {
+public abstract class AbstractJsonController extends AbstractController {
 	
     // default encoding
 	/** デフォルト文字コード　UTF-8 */

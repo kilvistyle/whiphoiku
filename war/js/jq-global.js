@@ -98,27 +98,10 @@ var aplProps = null;
             }
         });
     }
-    // セキュア通信のドメイン名に書き換え
-    $.fn.secureURL = function(secure) {
-	    // アプリケーションプロパティ情報がある場合
-    	if (aplProps) {
-    		// そのままURL書き換え処理へ
-        	return this.each(function(){
-        		replaceDomain(secure, $(this));
-        	});
-    	}
-    	// 初回のアプリケーションプロパティ情報参照時は取得後に再実行
-    	else {
-    		// 取得後に再実行
-        	var myObjs = this;
-        	getAplProps(
-            		function(){
-                    	myObjs.secureURL(secure);
-            		}
-            	);
-    	}
-    	// 書き換え処理
-    	function replaceDomain(isSecure, domObj) {
+    // Domain appender
+    $.fn.appendDomain = function(domain) {
+    	return this.each(function(){
+    		var domObj = $(this);
     		var tagName = domObj.get(0).tagName;
     		// aタグ
     		if (tagName.toLowerCase() == 'a') {
@@ -126,7 +109,6 @@ var aplProps = null;
     			if (isEmpty(path) || startsWith(path,'http')) {
     				return;
     			}
-    			var domain = isSecure ? aplProps.secureRootURL : aplProps.nonSecureRootURL;
     			if (startsWith(path,'/')) {
     				domObj.attr('href',domain+path);
     			}
@@ -140,7 +122,6 @@ var aplProps = null;
     			if (isEmpty(path) || startsWith(path,'http')) {
     				return;
     			}
-    			var domain = isSecure ? aplProps.secureRootURL : aplProps.nonSecureRootURL;
     			if (startsWith(path,'/')) {
     				domObj.attr('action',domain+path);
     			}
@@ -148,8 +129,9 @@ var aplProps = null;
     				// TODO 相対パス指定時のURL書き換えは後ほど対応
     			}
     		}
-    	}
+    	});
     }
+    
     // ieのconsole未対応対策
     if (typeof window.console === "undefined") window.console = {};
     if (typeof window.console.log !== "function") window.console.log = function(){};

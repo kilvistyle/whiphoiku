@@ -5,6 +5,9 @@ import org.slim3.controller.Navigation;
 import org.slim3.util.IntegerUtil;
 import org.slim3.util.StringUtil;
 
+import whiphoiku.util.JsonUtil;
+import whiphoiku.util.NavigateUtil;
+
 import com.google.appengine.api.datastore.Cursor;
 
 /**
@@ -15,6 +18,14 @@ import com.google.appengine.api.datastore.Cursor;
  */
 public abstract class AbstractController extends Controller {
 	
+	@Override
+	protected Navigation setUp() {
+        requestScope("_appId", NavigateUtil.getAppId());
+        requestScope("_secureDomain", NavigateUtil.getSecureRootURL());
+        requestScope("_nonSecureDomain", NavigateUtil.getNonSecureRootURL());
+		return super.setUp();
+	}
+
 	/**
 	 * リクエストパラメータが存在するか判定する.
 	 * 値がStringの場合、空文字はfalseと判定します。

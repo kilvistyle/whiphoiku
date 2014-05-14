@@ -22,6 +22,11 @@
   <script type="text/javascript" src="/js/ext/jquery-1.11.0.min.js" charset="UTF-8"></script>
   <script type="text/javascript" src="/js/jq-global.js" charset="UTF-8"></script>
   <script src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript" charset="UTF-8">
+  $(function() {
+	  $('a').secureURL(false);
+  });
+  </script>
   </head>
 <body>
     <div id="header">

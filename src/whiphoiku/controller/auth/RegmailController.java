@@ -52,6 +52,7 @@ public class RegmailController extends AbstractController {
             SendMail mail = new SendMail();
             mail.setTo(Arrays.asList(asString("mail")));
             mail.setBcc(Arrays.asList(AppProps.MAIL_FOR_BACKUP)); // 控え用
+            mail.setFrom(AppProps.MAIL_FOR_CUSTOMER);
             // 送信メールテンプレートを生成
             File ftlFile = null;
             // テンプレートメッセージ用の置換変数を準備

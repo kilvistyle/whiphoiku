@@ -156,6 +156,22 @@
             <role-name>admin</role-name>
         </auth-constraint>
     </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <url-pattern>/task/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <url-pattern>/test</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
 	<!-- 3. security added for CNMV. start -->
 	<security-constraint>
 		<web-resource-collection>
@@ -166,12 +182,4 @@
 		</auth-constraint>
 	</security-constraint>
 	<!-- 3. security added for CNMV. end -->
-    <security-constraint>
-        <web-resource-collection>
-            <url-pattern>/test</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>admin</role-name>
-        </auth-constraint>
-    </security-constraint>
 </web-app>

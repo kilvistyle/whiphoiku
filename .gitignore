@@ -4,6 +4,7 @@
 
 # java class files #
 *.class
+src/whiphoiku/meta/
 
 # Package Files #
 war/WEB-INF/lib/appengine*.jar

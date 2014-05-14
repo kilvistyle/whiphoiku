@@ -9,6 +9,8 @@ var errorClass = 'err';
 // 文字列に含まれるURLから<a …/>を生成した際に埋め込むClass名
 // $.convLinkText()にて利用
 var linkClass = 'linktext';
+// アプリケーションプロパティ情報
+var aplProps = null;
 
 //jqueryに共通処理追加
 (function($){
@@ -96,10 +98,98 @@ var linkClass = 'linktext';
             }
         });
     }
+    // セキュア通信のドメイン名に書き換え
+    $.fn.secureURL = function(secure) {
+	    // アプリケーションプロパティ情報がある場合
+    	if (aplProps) {
+    		// そのままURL書き換え処理へ
+        	return this.each(function(){
+        		replaceDomain(secure, $(this));
+        	});
+    	}
+    	// 初回のアプリケーションプロパティ情報参照時は取得後に再実行
+    	else {
+    		// 取得後に再実行
+        	var myObjs = this;
+        	getAplProps(
+            		function(){
+                    	myObjs.secureURL(secure);
+            		}
+            	);
+    	}
+    	// 書き換え処理
+    	function replaceDomain(isSecure, domObj) {
+    		var tagName = domObj.get(0).tagName;
+    		// aタグ
+    		if (tagName.toLowerCase() == 'a') {
+    			var path = domObj.attr('href');
+    			if (isEmpty(path) || startsWith(path,'http')) {
+    				return;
+    			}
+    			var domain = isSecure ? aplProps.secureRootURL : aplProps.nonSecureRootURL;
+    			if (startsWith(path,'/')) {
+    				domObj.attr('href',domain+path);
+    			}
+    			else {
+    				// TODO 相対パス指定時のURL書き換えは後ほど対応
+    			}
+    		}
+    		// formタグ
+    		else if (tagName.toLowerCase() == 'form') {
+    			var path = domObj.attr('action');
+    			if (isEmpty(path) || startsWith(path,'http')) {
+    				return;
+    			}
+    			var domain = isSecure ? aplProps.secureRootURL : aplProps.nonSecureRootURL;
+    			if (startsWith(path,'/')) {
+    				domObj.attr('action',domain+path);
+    			}
+    			else {
+    				// TODO 相対パス指定時のURL書き換えは後ほど対応
+    			}
+    		}
+    	}
+    }
     // ieのconsole未対応対策
     if (typeof window.console === "undefined") window.console = {};
     if (typeof window.console.log !== "function") window.console.log = function(){};
 })(jQuery);
+
+function getAplProps(successCallback, errorCallback) {
+	// すでにアプリケーションプロパティを保持している場合はそのまま正常コールバック
+	if (aplProps) {
+    	// 正常コールバック
+    	if (successCallback) successCallback(aplProps);
+	}
+	else {
+	    // アプリケーションプロパティ情報を取得
+	    $.ajax({
+	        type: 'GET',
+	        url: '/api/getAplProps',
+	        dataType: 'JSON',
+	        cache: false,
+	        timeout: 30000,
+	        success: function(json){
+	            if (!handleError(json)) {
+	            	// アプリケーションプロパティに保持
+	            	aplProps = json;
+	            	// 正常コールバック
+	            	if (successCallback) successCallback(aplProps);
+	            }
+	            else {
+	            	console.log('情報の取得に失敗しました：'+$.esc(json.errMsg));
+	            	// 異常コールバック
+	            	if (errorCallback) errorCallback(json);
+	            }
+	        },
+	        error: function() {
+	        	console.log('タイムアウトしました：');
+	        	// 異常コールバック
+	        	if (errorCallback) errorCallback({errCode:'ERR_DS_UNKNOWN', errMsg:'タイムアウトしました'});
+	        }
+	    });
+	}
+}
 
 // handle error
 function handleError(json) {
@@ -172,6 +262,9 @@ function isNumber(text) {
 	if (isEmpty(text)) return false;
 	var num = text-0;
 	return !isNaN(num);
+}
+function startsWith(text, target) {
+	return text.lastIndexOf(target, 0)==0;
 }
 
 /**

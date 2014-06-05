@@ -10,11 +10,16 @@ i{
 	margin-bottom:5px;
 }
 
-#header {
+#whip_header {
 	background-color:#F6F6F6;
 	height:auto;
 	padding:10px;
 	width:100%;
+	
+	-moz-border-radius-topright:5px;    /* 右上だけ角丸 */
+    -moz-border-radius-topleft:5px;     /* 左上だけ角丸 */
+	-webkit-border-top-left-radius:5px;    /* 左上だけ角丸 */
+    -webkit-border-top-right-radius:5px;   /* 右上だけ角丸 */  
 }
 #search_form_wrap{
 	padding:10px;
@@ -70,13 +75,13 @@ h1{
     -webkit-border-radius: 5px;    /* Safari,Google Chrome用 */  
     -moz-border-radius: 5px;   /* Firefox用 */  
     margin-top:5px;
+    margin-left:-168px;
     padding:10px;
     height:auto;
     position:absolute;
-    height:auto:;
     z-index:20;
-    right: 40%;
-    bottom: 30px;
+    left: 50%;
+    top: 530px;
     display: none;
 }
 

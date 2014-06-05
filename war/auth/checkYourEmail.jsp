@@ -12,6 +12,7 @@
 
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/whiphoiku.css" rel="stylesheet">
     <link href="/style.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,14 +24,21 @@
   <script type="text/javascript" src="/js/jq-global.js" charset="UTF-8"></script>
   <script src="/js/bootstrap.min.js"></script>
   </head>
-<body>
-    <div id="header">
-      <h1><img src="/images/hoiplogo.png" alt="ホイップ保育ロゴ" /></h1>
-    </div>
-    <div>
-    <h2>まだメール登録は完了していません。</h2>
-    <p>ご登録頂いたメールアドレスに、本登録用のメールを送信しています。</p>
-    <p>しばらく待ってもメールが届かない場合は、メールアドレスの登録間違いの可能性がありますので再度登録してください。</p>
-    </div>
+  <body>
+	<div class="container wh_container">
+		<div class="masthead">
+		  <h3 class="text-muted"><img alt="ホイップ保育ロゴマーク" width="370" class="img-responsive" src="../images/whiplogo.png" /></h3>
+		  <ul class="nav nav-justified">
+		    <li class="active"><a href="#">ホーム</a></li>
+		    <li><a href="#">空き状況検索</a></li>
+		    <li><a href="#">保育園一覧</a></li>
+		    <li><a href="#">料金計算</a></li>
+		    <li><a href="#">ホイップ保育？</a></li>
+		  </ul>
+		</div>
+	    <h2>まだメール登録は完了していません。</h2>
+	    <p>ご登録頂いたメールアドレスに、本登録用のメールを送信しています。</p>
+	    <p>しばらく待ってもメールが届かない場合は、メールアドレスの登録間違いの可能性がありますので再度登録してください。</p>
+	</div>
   </body>
 </html>

@@ -24,3 +24,5 @@ war/WEB-INF/appengine-generated/
 # eclipse settings #
 #.settings/com.google.appengine.eclipse.core.prefs
 #.externalToolBuilders/
+
+.DS_Store

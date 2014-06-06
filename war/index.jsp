@@ -4,7 +4,7 @@
 <%@taglib prefix="f" uri="http://www.slim3.org/functions"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,6 +13,7 @@
 
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/whiphoiku.css" rel="stylesheet">
     <link href="/style.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,11 +31,11 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $("#header").width($(window).width() - 20)
-      $("#map").height($(window).height() - $('#header').height() - 20);
+      $("#map").height(300);
     });
     $(window).resize(function() {
       $("#header").width($(window).width() - 20)
-      $("#map").height($(window).height() - $('#header').height() - 20);
+      $("#map").height(300);
     })
     function slideCustomSearch() {
       $("#custom_search").slideToggle();
@@ -99,8 +100,19 @@
   </script>
   </head>
 <body>
-    <div id="header">
-      <h1><img src="/images/hoiplogo.png" alt="ホイップ保育ロゴ" /></h1>
+<div class="container wh_container">
+<div class="masthead">
+  <h3 class="text-muted"><img alt="ホイップ保育ロゴマーク" width="370" class="img-responsive" src="./images/whiplogo.png" /></h3>
+  <ul class="nav nav-justified">
+    <li class="active"><a href="#">ホーム</a></li>
+    <li><a href="#">空き状況検索</a></li>
+    <li><a href="#">保育園一覧</a></li>
+    <li><a href="#">料金計算</a></li>
+    <li><a href="#">ホイップ保育？</a></li>
+  </ul>
+</div>
+
+    <div id="whip_header">
       <div id="search_form_wrap">
         <form action="" method="post" name="search" accept-charset="utf-8" class="fm NiceIt" id="search_form">
           <fieldset>
@@ -147,47 +159,33 @@
         </form>
       </div>
     </div>
+    
+    <!-- /header -->
+    
     <div id="search_custom" onclick="slideCustomSearch()"><i class="glyphicon glyphicon-th-list"></i><span>カスタム検索</span></div>
-    <div id="button_open_set" onclick="showRegistSet()"><i class="glyphicon glyphicon-plus"></i></div>
-    <div id="setting_wrap">
-        <div id="setting_regist">
-            <label for="search_address"><i
-                class="glyphicon glyphicon-home"></i>住所</label> <input type="text"
-                class="form-control" id="search_address" /> <label for="search_area"><i
-                class="glyphicon glyphicon-map-marker"></i>検索範囲</label> <select
-                name="search_area" id="search_area" class="form-control">
-                <option value="1km">1km</option>
-                <option value="3km">3km</option>
-                <option value="5km">5km</option>
-                <option value="10km">10km</option>
-                <option value="15km">15km</option>
-                <option value="20km">20km</option>
-            </select> <label for="age"><i class="glyphicon glyphicon-user"></i>年齢</label>
-            <select name="age" id="age" class="form-control">
-                <option value="age1">１歳</option>
-                <option value="age1">2歳</option>
-                <option value="age1">3歳</option>
-                <option value="age1">4歳</option>
-                <option value="age1">5歳</option>
-            </select> <label for="public_private"><i
-                class="glyphicon glyphicon-edit"></i>公立／私立</label> <select
-                name="public_private" id="public_private" class="form-control">
-                <option value="public">公立</option>
-                <option value="private">私立</option>
-            </select> <label for="mail_address"><i
-                class="glyphicon glyphicon-envelope"></i>通知するアドレス</label> <input type="text"
-                class="form-control" id="mail_address" />
-            <button type="submit" class="btn btn-default submit_button">
-                <strong> <i class="glyphicon glyphicon-ok"></i><span>登録</span>
-                </strong>
-            </button>
-        </div>
-    </div>
     <div id="reg_mail">
-    <form id="reg_mail_form" action="/auth/regmail" method="post">
-    </form>
+      <form id="reg_mail_form" action="/auth/regmail" method="post">
+      </form>
     </div>
-    <div id="map">
+    <div id="map"></div>
+    
+    <div style="margin-top:30px;">
+    <h3>更新情報</h3>
+    <table class="table table-striped">
+      <thead>
+      <tr><th width="150">日付</th><th>内容</th></tr>
+      </thead>
+      <tr><td>2016.06.05</td><td>ほげほげ</td></tr>
+      <tr><td>2016.06.05</td><td>ほげほげ</td></tr>
+      <tr><td>2016.06.05</td><td>ほげほげ</td></tr>
+    </table>
     </div>
+    
+    <!-- Site footer -->
+    <div class="footer">
+      <p>&copy; Company 2014</p>
+    </div>
+    
+</div>
   </body>
 </html>

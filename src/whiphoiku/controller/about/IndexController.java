@@ -1,9 +1,10 @@
 package whiphoiku.controller.about;
 
-import org.slim3.controller.Controller;
 import org.slim3.controller.Navigation;
 
-public class IndexController extends Controller {
+import whiphoiku.controller.AbstractController;
+
+public class IndexController extends AbstractController {
 
     @Override
     public Navigation run() throws Exception {

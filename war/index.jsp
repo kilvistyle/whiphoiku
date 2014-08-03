@@ -102,11 +102,11 @@
 <body>
 <div class="container wh_container">
 <div class="masthead">
-  <h3 class="text-muted"><img alt="ホイップ保育ロゴマーク" width="370" class="img-responsive" src="./images/whiplogo.png" /></h3>
+  <h3 class="text-muted"><img alt="ホイップ保育ロゴマーク" width="370" class="img-responsive" src="/images/whiplogo.png" /></h3>
   <ul class="nav nav-justified">
     <li class="active"><a href="#">ホーム</a></li>
-    <li><a href="#">空き状況検索</a></li>
-    <li><a href="#">保育園一覧</a></li>
+    <li><a href="/">空き状況検索</a></li>
+    <li><a href="/nursery/list">保育園一覧</a></li>
     <li><a href="#">料金計算</a></li>
     <li><a href="#">ホイップ保育？</a></li>
   </ul>

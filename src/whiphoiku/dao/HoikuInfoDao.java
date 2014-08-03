@@ -15,7 +15,17 @@ public class HoikuInfoDao extends DaoBase<HoikuInfo>{
     public List<HoikuInfo> findAll() {
         return super.query().asList();
     }
-    
+
+    /**
+     * @param zipcode
+     * @return
+     */
+    public List<HoikuInfo> findByZipCode(String zipcode){
+    	return super.query()
+    			.filter(meta.zipcode.equal(zipcode))
+    			.asList();
+    }
+
     public List<HoikuInfo> findByCondition(int schoolKubun, int age) {
         // クエリ生成
         ModelQuery<HoikuInfo> query = super.query();

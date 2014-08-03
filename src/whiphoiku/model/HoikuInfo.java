@@ -24,40 +24,52 @@ public class HoikuInfo implements Serializable, IJsonable {
 
     @Attribute(version = true)
     private Long version;
-    
+
     // 名前
     private String name;
     
     // Geoコード
     private GeoPt geoPt;
-    
+
+    // 郵便番号
+    private String zipcode;
+
     // 住所
     private String address;
     
     // 電話番号
     private String tellNo;
-    
+
+    // HP
+    private String officialUrl;
+
     // 私立・公立の区分。 1:公立  2:私立
     private int schoolKubun;
-    
+
     // 募集人数 ０歳児
-    private int collectZeroYear;
+    private Integer collectZeroYear;
     
     // 募集人数 １歳児
-    private int collectOneYear;
+    private Integer collectOneYear;
 
     // 募集人数 ２歳児
-    private int collectTwoYear;
+    private Integer collectTwoYear;
 
     // 募集人数 ３歳児
-    private int collectThreeYear;
+    private Integer collectThreeYear;
     
     // 募集人数 ４歳児
-    private int collectFourYear;
+    private Integer collectFourYear;
 
     // 募集人数 ５歳児
-    private int collectFiveYear;
-    
+    private Integer collectFiveYear;
+
+    // 開所時間
+    private Date openingTime;
+
+    // 備考
+    private String remarks;
+
     // 距離 (非永続化情報)
     @Attribute(persistent=false)
     private Double distance;
@@ -97,51 +109,51 @@ public class HoikuInfo implements Serializable, IJsonable {
     }
 
 
-    public int getCollectZeroYear() {
+    public Integer getCollectZeroYear() {
         return collectZeroYear;
     }
 
-    public void setCollectZeroYear(int collectZeroYear) {
+    public void setCollectZeroYear(Integer collectZeroYear) {
         this.collectZeroYear = collectZeroYear;
     }
 
-    public int getCollectOneYear() {
+    public Integer getCollectOneYear() {
         return collectOneYear;
     }
 
-    public void setCollectOneYear(int collectOneYear) {
+    public void setCollectOneYear(Integer collectOneYear) {
         this.collectOneYear = collectOneYear;
     }
 
-    public int getCollectTwoYear() {
+    public Integer getCollectTwoYear() {
         return collectTwoYear;
     }
 
-    public void setCollectTwoYear(int collectTwoYear) {
+    public void setCollectTwoYear(Integer collectTwoYear) {
         this.collectTwoYear = collectTwoYear;
     }
 
-    public int getCollectThreeYear() {
+    public Integer getCollectThreeYear() {
         return collectThreeYear;
     }
 
-    public void setCollectThreeYear(int collectThreeYear) {
+    public void setCollectThreeYear(Integer collectThreeYear) {
         this.collectThreeYear = collectThreeYear;
     }
 
-    public int getCollectFourYear() {
+    public Integer getCollectFourYear() {
         return collectFourYear;
     }
 
-    public void setCollectFourYear(int collectFourYear) {
+    public void setCollectFourYear(Integer collectFourYear) {
         this.collectFourYear = collectFourYear;
     }
 
-    public int getCollectFiveYear() {
+    public Integer getCollectFiveYear() {
         return collectFiveYear;
     }
 
-    public void setCollectFiveYear(int collectFiveYear) {
+    public void setCollectFiveYear(Integer collectFiveYear) {
         this.collectFiveYear = collectFiveYear;
     }
 
@@ -241,6 +253,38 @@ public class HoikuInfo implements Serializable, IJsonable {
 	 */
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public String getOfficialUrl() {
+		return officialUrl;
+	}
+
+	public void setOfficialUrl(String officialUrl) {
+		this.officialUrl = officialUrl;
+	}
+
+	public Date getOpeningTime() {
+		return openingTime;
+	}
+
+	public void setOpeningTime(Date openingTime) {
+		this.openingTime = openingTime;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 
 	@Override

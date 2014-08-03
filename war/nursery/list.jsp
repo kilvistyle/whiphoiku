@@ -39,6 +39,7 @@
 </c:if>
 <c:if test="${not empty hoikuList}">
 <tr>
+<th>地区</th>
 <th>園名</th>
 <th>保育園種別</th>
 <th>郵便番号</th>
@@ -49,6 +50,7 @@
 </c:if>
 <c:forEach var="hoiku" items="${hoikuList}" varStatus="status">
 <tr>
+<td>${hoiku.extractType}</td>
 <td>${hoiku.name}</td>
 <td>${hoiku.schoolKubun}</td>
 <td>${hoiku.zipcode}</td>

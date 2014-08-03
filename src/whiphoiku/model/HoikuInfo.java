@@ -3,6 +3,8 @@ package whiphoiku.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import jp.co.casleyconsulting.www.nurseryVacancy.constants.ExtractType;
+
 import org.slim3.datastore.Attribute;
 import org.slim3.datastore.CreationDate;
 import org.slim3.datastore.Model;
@@ -25,9 +27,11 @@ public class HoikuInfo implements Serializable, IJsonable {
     @Attribute(version = true)
     private Long version;
 
+    private ExtractType extractType;
+
     // 名前
     private String name;
-    
+
     // Geoコード
     private GeoPt geoPt;
 
@@ -287,7 +291,15 @@ public class HoikuInfo implements Serializable, IJsonable {
 		this.remarks = remarks;
 	}
 
-	@Override
+	public ExtractType getExtractType() {
+        return extractType;
+    }
+
+    public void setExtractType(ExtractType extractType) {
+        this.extractType = extractType;
+    }
+
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;

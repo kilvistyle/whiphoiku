@@ -21,9 +21,19 @@ public class HoikuInfoDao extends DaoBase<HoikuInfo>{
      * @return
      */
     public List<HoikuInfo> findByZipCode(String zipcode){
-    	return super.query()
-    			.filter(meta.zipcode.equal(zipcode))
-    			.asList();
+        return super.query()
+                .filter(meta.zipcode.equal(zipcode))
+                .asList();
+    }
+
+    /**
+     * @param zipcode
+     * @return
+     */
+    public List<HoikuInfo> findByName(String name){
+        return super.query()
+                .filter(meta.name.equal(name))
+                .asList();
     }
 
     public List<HoikuInfo> findByCondition(int schoolKubun, int age) {
@@ -59,5 +69,4 @@ public class HoikuInfoDao extends DaoBase<HoikuInfo>{
         // 検索結果をリストで取得
         return query.asList();
     }
-    
 }

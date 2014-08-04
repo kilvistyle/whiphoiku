@@ -7,6 +7,7 @@ import jp.co.casleyconsulting.www.nurseryVacancy.constants.ExtractType;
 import jp.co.casleyconsulting.www.nurseryVacancy.dto.NurseryVacancyInfo;
 import jp.co.casleyconsulting.www.nurseryVacancy.factory.VacancyExtractorFactory;
 
+import org.slim3.util.BeanUtil;
 import org.slim3.util.StringUtil;
 
 import com.google.appengine.api.datastore.Key;
@@ -39,11 +40,14 @@ public class NurseryService {
     }
 
     public void putHoikuInfo(HoikuInfo hoikuInfo, String id){
-        if(! StringUtil.isEmpty(id)){
+        HoikuInfo putHoikuInfo = hoikuInfo;
+        if(! StringUtil.isEmpty(id)) {
             Key key = KeyFactory.createKey("HoikuInfo", Long.parseLong(id) );
+            putHoikuInfo = this.hoikuInfoDao.get(key);
             hoikuInfo.setKey(key);
+            BeanUtil.copy(hoikuInfo, putHoikuInfo);
         }
-        this.hoikuInfoDao.put(hoikuInfo);
+        this.hoikuInfoDao.put(putHoikuInfo);
     }
 
     public void delHoikuInfo(String id){
@@ -52,6 +56,7 @@ public class NurseryService {
     }
 
     /**
+     * lastest nursery vacancy infomation
      * @param extractType
      */
     public void setNurseryVacancyInfo(){
@@ -66,23 +71,34 @@ public class NurseryService {
         List<HoikuInfo> hoikuInfoList = new ArrayList<HoikuInfo>();
 
         for (NurseryVacancyInfo nurseryVacancyInfo : extracted) {
-            List<HoikuInfo> hoikuInfoCache = hoikuInfoDao.findByName(nurseryVacancyInfo.name);
+            List<HoikuInfo> hoikuInfoCache = hoikuInfoDao.findByNameAndArea(
+                    nurseryVacancyInfo.name
+                    , nurseryVacancyInfo.extractType.getAddressPrx());
+
             HoikuInfo hoikuInfo = (hoikuInfoCache == null || hoikuInfoCache.size() == 0) ? new HoikuInfo(): hoikuInfoCache.get(0);
+
+            // set nursery infomation
             hoikuInfo.setExtractType(nurseryVacancyInfo.extractType);
             hoikuInfo.setName(nurseryVacancyInfo.name);
-            hoikuInfo.setCollectZeroYear(numeric (nurseryVacancyInfo.zeroCnt));
-            hoikuInfo.setCollectOneYear(numeric(nurseryVacancyInfo.firstCnt));
-            hoikuInfo.setCollectTwoYear(numeric(nurseryVacancyInfo.secondCnt));
-            hoikuInfo.setCollectThreeYear(numeric(nurseryVacancyInfo.thirdCnt));
-            hoikuInfo.setCollectFourYear(numeric(nurseryVacancyInfo.fourthCnt));
-            hoikuInfo.setCollectFiveYear(numeric(nurseryVacancyInfo.fifthCnt));
+            if(StringUtil.isEmpty(hoikuInfo.getAddress()) ){
+                hoikuInfo.setAddress(nurseryVacancyInfo.extractType.getAddressPrx());
+            }
+
+            // set vacancy infomation
+            hoikuInfo.setCollectZeroYear(collectNum (nurseryVacancyInfo.zeroCnt));
+            hoikuInfo.setCollectOneYear(collectNum(nurseryVacancyInfo.firstCnt));
+            hoikuInfo.setCollectTwoYear(collectNum(nurseryVacancyInfo.secondCnt));
+            hoikuInfo.setCollectThreeYear(collectNum(nurseryVacancyInfo.thirdCnt));
+            hoikuInfo.setCollectFourYear(collectNum(nurseryVacancyInfo.fourthCnt));
+            hoikuInfo.setCollectFiveYear(collectNum(nurseryVacancyInfo.fifthCnt));
+
+            // add register list
             hoikuInfoList.add(hoikuInfo);
         }
-
         hoikuInfoDao.put(hoikuInfoList);
     }
 
-    public static Integer numeric (String val) {
+    public static Integer collectNum (String val) {
         Integer ret = 0;
         try{
             ret = Integer.parseInt(val);

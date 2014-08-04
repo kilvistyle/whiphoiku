@@ -7,7 +7,6 @@ import jp.co.casleyconsulting.www.nurseryVacancy.constants.ExtractType;
 import jp.co.casleyconsulting.www.nurseryVacancy.dto.NurseryVacancyInfo;
 import jp.co.casleyconsulting.www.nurseryVacancy.factory.VacancyExtractorFactory;
 
-import org.slim3.util.BeanUtil;
 import org.slim3.util.StringUtil;
 
 import com.google.appengine.api.datastore.Key;
@@ -44,8 +43,19 @@ public class NurseryService {
         if(! StringUtil.isEmpty(id)) {
             Key key = KeyFactory.createKey("HoikuInfo", Long.parseLong(id) );
             putHoikuInfo = this.hoikuInfoDao.get(key);
-            hoikuInfo.setKey(key);
-            BeanUtil.copy(hoikuInfo, putHoikuInfo);
+            putHoikuInfo.setName(hoikuInfo.getName());
+            putHoikuInfo.setZipcode(hoikuInfo.getZipcode());
+            putHoikuInfo.setAddress(hoikuInfo.getAddress());
+            putHoikuInfo.setTellNo(hoikuInfo.getTellNo());
+            putHoikuInfo.setOfficialUrl(hoikuInfo.getOfficialUrl());
+            putHoikuInfo.setSchoolKubun(hoikuInfo.getSchoolKubun());
+            putHoikuInfo.setCollectZeroYear(hoikuInfo.getCollectZeroYear());
+            putHoikuInfo.setCollectOneYear(hoikuInfo.getCollectOneYear());
+            putHoikuInfo.setCollectTwoYear(hoikuInfo.getCollectTwoYear());
+            putHoikuInfo.setCollectThreeYear(hoikuInfo.getCollectThreeYear());
+            putHoikuInfo.setCollectFourYear(hoikuInfo.getCollectFourYear());
+            putHoikuInfo.setCollectFiveYear(hoikuInfo.getCollectFiveYear());
+            putHoikuInfo.setRemarks(hoikuInfo.getRemarks());
         }
         this.hoikuInfoDao.put(putHoikuInfo);
     }

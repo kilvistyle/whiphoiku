@@ -36,6 +36,17 @@ public class HoikuInfoDao extends DaoBase<HoikuInfo>{
                 .asList();
     }
 
+    /**
+     * @param zipcode
+     * @return
+     */
+    public List<HoikuInfo> findByNameAndArea(String name, String area){
+        return super.query()
+                .filter(meta.address.startsWith(area))
+                .filter(meta.name.equal(name))
+                .asList();
+    }
+
     public List<HoikuInfo> findByCondition(int schoolKubun, int age) {
         // クエリ生成
         ModelQuery<HoikuInfo> query = super.query();

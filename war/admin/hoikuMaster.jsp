@@ -11,7 +11,7 @@
 <body>
 <h1>保育園情報登録</h1>
 <h2>データ登録</h2>
-<form action="/test/hoikuMaster" method="post" class="form-horizontal" role="form">
+<form action="/admin/hoikuMaster" method="post" class="form-horizontal" role="form">
   <c:if test="${not empty initData}"><input type="hidden" name="hoikuId" value="${initData.key.id}" /></c:if>
   <div class="form-group form-group-sm">
     <label class="col-sm-2 control-label" for="name">園名</label>
@@ -125,10 +125,10 @@
 </tr>
 </c:forEach>
 </table>
-<form id="frmDelHoiku" action="/test/hoikuDelete" method="post">
+<form id="frmDelHoiku" action="/admin/hoikuDelete" method="post">
 <input type="hidden" name="dataId" id="delDataId" value="" />
 </form>
-<form id="frmEditHoiku" action="/test/hoikuMaster" method="get">
+<form id="frmEditHoiku" action="/admin/hoikuMaster" method="get">
 <input type="hidden" name="dataId" id="editDataId" value="" />
 </form>
 <script type="text/javascript" src="/js/ext/jquery-1.11.0.min.js"></script>

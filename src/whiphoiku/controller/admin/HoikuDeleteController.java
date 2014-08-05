@@ -1,4 +1,4 @@
-package whiphoiku.controller.test;
+package whiphoiku.controller.admin;
 
 import org.slim3.controller.Controller;
 import org.slim3.controller.Navigation;

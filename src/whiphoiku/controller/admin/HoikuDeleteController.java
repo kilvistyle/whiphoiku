@@ -16,6 +16,6 @@ public class HoikuDeleteController extends Controller {
         if(isPost()){
         	this.nurseryService.delHoikuInfo((String)requestScope("dataId"));
         }
-        return redirect("/test/hoikuMaster");
+        return redirect("hoikuMaster.jsp");
     }
 }

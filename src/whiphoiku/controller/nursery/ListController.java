@@ -11,6 +11,9 @@ public class ListController extends AbstractController {
 
     @Override
     public Navigation run() throws Exception {
+    	
+    	String ward = asString("ward");
+
         requestScope("hoikuList", nurseryService.getHoikuInfoAll());
         return forward("/nursery/list.jsp");
     }

@@ -170,7 +170,7 @@ $(function(){
     	}
     	// まだgeopointを解決していない場合
         if (!$('#lat').val() || !$('#lng').val()) {
-            // フォームボタン名を変更
+            // submitボタンを無効化
             $('#submit_btn').attr('disabled','disabled');
             // 住所からGeopointを解決
             toGeocode($('#address').val(),
@@ -179,7 +179,7 @@ $(function(){
                     // geopointをhiddenパラメタにセット
                     $('#lat').val(geocodeinfo[0].geometry.location.lat);
                     $('#lng').val(geocodeinfo[0].geometry.location.lng);
-                    // フォームボタン名を戻す
+                    // submitボタンを有効化
                     $('#submit_btn').removeAttr('disabled');
                     // submit再実行
                     $('#editform').submit();
@@ -188,7 +188,7 @@ $(function(){
                 function (err) {
                     console.log('住所変換に失敗しました.'+$.esc(err.errMsg));
                     alert('住所の特定に失敗しました：'+$.esc(err.errMsg));
-                    // フォームボタン名を戻す
+                    // submitボタンを有効化
                     $('#submit_btn').removeAttr('disabled');
                 });
             return false;

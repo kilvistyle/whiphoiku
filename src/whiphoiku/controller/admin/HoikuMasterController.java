@@ -5,6 +5,8 @@ import org.slim3.controller.Navigation;
 import org.slim3.util.BeanUtil;
 import org.slim3.util.StringUtil;
 
+import com.google.appengine.api.datastore.GeoPt;
+
 import whiphoiku.model.HoikuInfo;
 import whiphoiku.service.master.NurseryService;
 
@@ -20,8 +22,11 @@ public class HoikuMasterController extends Controller {
         if(isPost()){
             HoikuInfo hoikuInfo = new HoikuInfo();
             BeanUtil.copy(request, hoikuInfo);
+            hoikuInfo.setGeoPt(new GeoPt(asFloat("lat"), asFloat("lng"))); //座標の設定
             NurseryService nurseryService = new NurseryService();
             nurseryService.putHoikuInfo(hoikuInfo, (String)requestScope("hoikuId"));
+            // 登録後はリダイレクトする
+            return redirect("hoikuMaster");
         }
         if(isGet() &&  ! StringUtil.isEmpty((String)requestScope("dataId"))){
             HoikuInfo editTarget = nurseryService.getHoikuInfoById((String)requestScope("dataId"));

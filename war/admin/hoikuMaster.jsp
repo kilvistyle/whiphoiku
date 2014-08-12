@@ -11,7 +11,9 @@
 <body>
 <h1>保育園情報登録</h1>
 <h2>データ登録</h2>
-<form action="/admin/hoikuMaster" method="post" class="form-horizontal" role="form">
+<form id="editform" action="/admin/hoikuMaster" method="post" class="form-horizontal" role="form">
+  <input type="hidden" id="lat" name="lat" value="${initData.geoPt==null?'':initData.geoPt.latitude}">
+  <input type="hidden" id="lng" name="lng" value="${initData.geoPt==null?'':initData.geoPt.longitude}">
   <c:if test="${not empty initData}"><input type="hidden" name="hoikuId" value="${initData.key.id}" /></c:if>
   <div class="form-group form-group-sm">
     <label class="col-sm-2 control-label" for="name">園名</label>
@@ -75,7 +77,7 @@
     <div class="col-sm-10"><input type="text" id="remarks" name="remarks" class="form-control input-sm" value="${initData.remarks}" /></div>
   </div>
   <div class="form-group form-group-sm">
-    <div class="col-sm-offset-2 col-sm-10"><button type="submit" class="btn btn-default">登録</button></div>
+    <div class="col-sm-offset-2 col-sm-10"><button type="submit" id="submit_btn" class="btn btn-default">登録</button></div>
   </div>
 </form>
 <br />
@@ -132,6 +134,9 @@
 <input type="hidden" name="dataId" id="editDataId" value="" />
 </form>
 <script type="text/javascript" src="/js/ext/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="/js/jq-global.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/jq-geourl.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/jq-zip2addr.js" charset="UTF-8"></script>
 <script type="text/javascript">
 $(function(){
     $(".del_btn").click(function(){
@@ -141,6 +146,57 @@ $(function(){
     $(".edit_btn").click(function(){
         $("#editDataId").val($(this).data("hoiku-id"));
         $("#frmEditHoiku").submit();
+    });
+    // 郵便番号から住所変換
+    $('#zipcode').zip2addr('#address');
+    // 住所フィールドの値変更時
+    $('#address').change(function(){
+        // hiddenのgeopointをリセット
+        $('#lat').val('');
+        $('#lng').val('');
+    });
+    // フォームサブミット時
+    $('#editform').submit(function(){
+    	// 最低限の入力チェック
+    	// 保育園名
+    	if ($('#name').val() == false) {
+    		alert('保育園名が未入力です');
+    		return false;
+    	}
+    	// 住所
+    	if ($('#address').val() == false) {
+    		alert('住所が未入力です');
+    		return false;
+    	}
+    	// まだgeopointを解決していない場合
+        if (!$('#lat').val() || !$('#lng').val()) {
+            // フォームボタン名を変更
+            $('#submit_btn').attr('disabled','disabled');
+            // 住所からGeopointを解決
+            toGeocode($('#address').val(),
+                // success callback
+                function(geocodeinfo) {
+                    // geopointをhiddenパラメタにセット
+                    $('#lat').val(geocodeinfo[0].geometry.location.lat);
+                    $('#lng').val(geocodeinfo[0].geometry.location.lng);
+                    // フォームボタン名を戻す
+                    $('#submit_btn').removeAttr('disabled');
+                    // submit再実行
+                    $('#editform').submit();
+                },
+                // error callback
+                function (err) {
+                    console.log('住所変換に失敗しました.'+$.esc(err.errMsg));
+                    alert('住所の特定に失敗しました：'+$.esc(err.errMsg));
+                    // フォームボタン名を戻す
+                    $('#submit_btn').removeAttr('disabled');
+                });
+            return false;
+    	}
+        else {
+            // submit続行
+            return confirm('登録します。よろしいですか。');
+        }
     });
 });
 </script>

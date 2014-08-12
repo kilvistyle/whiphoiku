@@ -20,6 +20,8 @@ import com.google.appengine.api.datastore.Key;
 public class HoikuInfo implements Serializable, IJsonable {
 
     private static final long serialVersionUID = 1L;
+    
+    private static final Integer ZERO_VALUE = Integer.valueOf(0);
 
     @Attribute(primaryKey = true)
     private Key key;
@@ -51,22 +53,22 @@ public class HoikuInfo implements Serializable, IJsonable {
     private int schoolKubun;
 
     // 募集人数 ０歳児
-    private Integer collectZeroYear;
+    private Integer collectZeroYear = ZERO_VALUE;
     
     // 募集人数 １歳児
-    private Integer collectOneYear;
+    private Integer collectOneYear = ZERO_VALUE;
 
     // 募集人数 ２歳児
-    private Integer collectTwoYear;
+    private Integer collectTwoYear = ZERO_VALUE;
 
     // 募集人数 ３歳児
-    private Integer collectThreeYear;
+    private Integer collectThreeYear = ZERO_VALUE;
     
     // 募集人数 ４歳児
-    private Integer collectFourYear;
+    private Integer collectFourYear = ZERO_VALUE;
 
     // 募集人数 ５歳児
-    private Integer collectFiveYear;
+    private Integer collectFiveYear = ZERO_VALUE;
 
     // 開所時間
     private Date openingTime;

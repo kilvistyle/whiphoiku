@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.slim3.controller.Navigation;
 import org.slim3.controller.validator.Validators;
+import org.slim3.util.NumberUtil;
 
 import whiphoiku.dao.HoikuInfoDao;
 import whiphoiku.model.HoikuInfo;
@@ -83,11 +84,11 @@ public class GetHoikuInfoController extends AbstractJsonController {
             default:
                 // 年齢指定がない場合は全年齢の募集人数を加算
                 vo.setTargetVacant(
-                    vo.getCollectOneYear()+
-                    vo.getCollectTwoYear()+
-                    vo.getCollectThreeYear()+
-                    vo.getCollectFourYear()+
-                    vo.getCollectFiveYear()
+                    nullToZero(vo.getCollectOneYear())+
+                    nullToZero(vo.getCollectTwoYear())+
+                    nullToZero(vo.getCollectThreeYear())+
+                    nullToZero(vo.getCollectFourYear())+
+                    nullToZero(vo.getCollectFiveYear())
                 );
                 break;
             }
@@ -122,5 +123,13 @@ public class GetHoikuInfoController extends AbstractJsonController {
         double distance = R * C;
         distance = Math.round(decimalNo * distance / 1) / decimalNo;
         return (float) distance;
+    }
+    /**
+     * 引数のパラメータがnullの場合は 0 として返却する
+     * @param val
+     * @return
+     */
+    private int nullToZero(Integer val) {
+    	return val==null? 0 : val;
     }
 }

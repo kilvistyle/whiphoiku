@@ -64,22 +64,22 @@ public class GetHoikuInfoController extends AbstractJsonController {
             // 検索対象年齢の空き人数を設定
             switch (age) {
             case 0:
-                vo.setTargetVacant(vo.getCollectZeroYear());
+                vo.setTargetVacant(nullToZero(vo.getCollectZeroYear()));
                 break;
             case 1:
-                vo.setTargetVacant(vo.getCollectOneYear());
+                vo.setTargetVacant(nullToZero(vo.getCollectOneYear()));
                 break;
             case 2:
-                vo.setTargetVacant(vo.getCollectTwoYear());
+                vo.setTargetVacant(nullToZero(vo.getCollectTwoYear()));
                 break;
             case 3:
-                vo.setTargetVacant(vo.getCollectThreeYear());
+                vo.setTargetVacant(nullToZero(vo.getCollectThreeYear()));
                 break;
             case 4:
-                vo.setTargetVacant(vo.getCollectFourYear());
+                vo.setTargetVacant(nullToZero(vo.getCollectFourYear()));
                 break;
             case 5:
-                vo.setTargetVacant(vo.getCollectFiveYear());
+                vo.setTargetVacant(nullToZero(vo.getCollectFiveYear()));
                 break;
             default:
                 // 年齢指定がない場合は全年齢の募集人数を加算

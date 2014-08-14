@@ -2,6 +2,8 @@ package whiphoiku.dao;
 
 import java.util.List;
 
+import jp.co.casleyconsulting.www.nurseryVacancy.constants.ExtractType;
+
 import org.slim3.datastore.DaoBase;
 import org.slim3.datastore.ModelQuery;
 
@@ -37,7 +39,18 @@ public class HoikuInfoDao extends DaoBase<HoikuInfo>{
     }
 
     /**
-     * @param zipcode
+     * @param extractType
+     * @return
+     */
+    public List<HoikuInfo> findByNameExtractType(ExtractType extractType){
+        return super.query()
+                .filter(meta.extractType.equal(extractType))
+                .asList();
+    }
+
+    /**
+     * @param name
+     * @param area
      * @return
      */
     public List<HoikuInfo> findByNameAndArea(String name, String area){

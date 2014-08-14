@@ -30,6 +30,29 @@ public class NurseryService {
         return hoikuInfoDao.get(key);
     }
 
+    /**
+     * @param extractType
+     * @return
+     */
+    public List<HoikuInfo> findByNameExtractType(String extractType){
+        ExtractType[] extractTypeArray = ExtractType.values();
+        ExtractType searchExtractType = null;
+        for (ExtractType checkExtractType : extractTypeArray) {
+            if(checkExtractType.name().toString().equals(extractType)){
+                searchExtractType = checkExtractType;
+                break;
+            }
+        }
+        return hoikuInfoDao.findByNameExtractType(searchExtractType);
+    }
+    /**
+     * @param extractType
+     * @return
+     */
+    public List<HoikuInfo> findByNameExtractType(ExtractType extractType){
+        return hoikuInfoDao.findByNameExtractType(extractType);
+    }
+
     public List<HoikuInfo> getHoikuInfoAll(){
         return this.hoikuInfoDao.findAll();
     }

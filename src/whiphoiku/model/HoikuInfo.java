@@ -29,6 +29,7 @@ public class HoikuInfo implements Serializable, IJsonable {
     @Attribute(version = true)
     private Long version;
 
+    // 地区種別
     private ExtractType extractType;
 
     // 名前

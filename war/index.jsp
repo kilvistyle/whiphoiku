@@ -1,9 +1,9 @@
+<!DOCTYPE html>
 <%@page pageEncoding="UTF-8" isELIgnored="false" session="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="f" uri="http://www.slim3.org/functions"%>
-
-<!DOCTYPE html>
 <html lang="ja">
   <head>
     <meta charset="utf-8">
@@ -172,15 +172,24 @@
     <div style="margin-top:30px;">
     <h3>更新情報</h3>
     <table class="table table-striped">
+      <c:if test="${empty news}">
+      <tr><td>更新情報はありません。</td></tr>
+      </c:if>
+      <c:if test="${not empty news}">
       <thead>
       <tr><th width="150">日付</th><th>内容</th></tr>
       </thead>
-      <tr><td>2016.06.05</td><td>ほげほげ</td></tr>
-      <tr><td>2016.06.05</td><td>ほげほげ</td></tr>
-      <tr><td>2016.06.05</td><td>ほげほげ</td></tr>
+      <tbody>
+        <c:forEach var="topic" items="${news}">
+        <tr>
+          <td><fmt:formatDate value="${topic.openDate}" pattern="yyyy.MM.dd" /></td>
+          <td>${topic.title}</td>
+        </tr>
+        </c:forEach>
+      </tbody>
+      </c:if>
     </table>
     </div>
-    
     <!-- Site footer -->
     <div class="footer">
       <p>&copy; Company 2014</p>

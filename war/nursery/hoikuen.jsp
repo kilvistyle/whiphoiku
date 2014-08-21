@@ -46,17 +46,20 @@
     
 	    <div>
 			<div class="page-header">
-				<h1>保育園一覧</h1>
+				<h1>千代田区立神田保育園</h1>
 			</div>
 			<div class="table-responsive">
 				<table class="table table-striped table-bordered">
-					<tr><th>保育園名</th><th>種別</th><th>電話番号</th><th>住所</th></tr>
-					<tr><td><a href="/nursery/hoikuen?id=">千代田区立神田保育園</a></td><td>認可（公立）</td><td>03-3253-6258</td><td>千代田区神田淡路町2-109</td></tr>
-					<tr><td><a href="#">千代田区立西神田保育園</a></td><td>認可（公立）</td><td>03-3253-6258</td><td>千代田区西神田2-6-2</td></tr>
-					<tr><td><a href="#">千代田区立麹町保育園</a></td><td>認可（公立）</td><td>03-3253-6258</td><td>千代田区三番町7</td></tr>
-					<tr><td><a href="#">千代田区立四番町保育園</a></td><td>認可（公立）</td><td>03-3253-6258</td><td>千代田区四番町11番地</td></tr>
-					<tr><td><a href="#">ポピンズナーサリースクール一番町</a></td><td>認可（私立）</td><td>102-0082</td><td>千代田区一番町10-8 ウエストビル2Ｆ</td></tr>
-					<tr><td><a href="#">アスク二番町保育園</a></td><td>認可（私立）</td><td>03-3253-6258</td><td>千代田区二番町2-1 二番町TSビル1～3階</td></tr>
+					<tr><th>保育園名</th><td>千代田区立神田保育園</td></tr>
+					<tr><th>種別</th><td>認可（公立）</td></tr>
+					<tr><th>運営主体</th><td>千代田区</td></tr>
+					<tr><th>郵便番号</th><td>101-0063</td></tr>
+					<tr><th>住所</th><td>千代田区神田淡路町2-109</td></tr>
+					<tr><th>電話番号</th><td>03-3253-6258</td></tr>
+					<tr><th>HP</th><td>http://www.city.chiyoda.lg.jp/koho/kosodate/hoikuen/shisetsu/kanda.html</td></tr>
+					<tr><th>受入月齢・年齢</th><td>57日～就学前</td></tr>
+					<tr><th>開所時間</th><td>7：30～19：30</td></tr>
+					<tr><th>備考</th><td>延長保育は1歳児クラス以上対象</td></tr>
 				</table>
 			</div>
 	    </div>

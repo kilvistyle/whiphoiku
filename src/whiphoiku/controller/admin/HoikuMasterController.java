@@ -23,7 +23,6 @@ public class HoikuMasterController extends Controller {
             HoikuInfo hoikuInfo = new HoikuInfo();
             BeanUtil.copy(request, hoikuInfo);
             hoikuInfo.setGeoPt(new GeoPt(asFloat("lat"), asFloat("lng"))); //座標の設定
-            NurseryService nurseryService = new NurseryService();
             nurseryService.putHoikuInfo(hoikuInfo, (String)requestScope("hoikuId"));
             // 登録後はリダイレクトする
             return redirect("hoikuMaster");

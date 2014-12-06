@@ -1,11 +1,14 @@
 package whiphoiku.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import jp.co.casleyconsulting.www.nurseryVacancy.constants.ExtractType;
 
 import org.slim3.datastore.DaoBase;
 import org.slim3.datastore.ModelQuery;
+
+import com.google.appengine.api.datastore.GeoPt;
 
 import whiphoiku.meta.HoikuInfoMeta;
 import whiphoiku.model.HoikuInfo;
@@ -92,5 +95,18 @@ public class HoikuInfoDao extends DaoBase<HoikuInfo>{
         }
         // 検索結果をリストで取得
         return query.asList();
+    }
+    
+    public List<HoikuInfo> findByGeoLocation(Date after, GeoPt startPt, GeoPt endPt) {
+        // クエリ生成
+        ModelQuery<HoikuInfo> query = super.query();
+        // 検索実行
+        return query
+        	// 指定日以降の更新日付である
+        	.filter(meta.updateTime.greaterThanOrEqual(after))
+        	// 始点以上、終点以下の範囲
+        	.filter(meta.geoPt.greaterThanOrEqual(startPt))
+        	.filter(meta.geoPt.lessThanOrEqual(endPt))
+        	.asList();
     }
 }
